@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\User\AuthRepository;
 use App\Http\Requests\User\Auth\RegisterRequest;
 use App\Http\Requests\User\Auth\LoginRequest;
-
+use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     /**
@@ -15,23 +15,49 @@ class AuthController extends Controller
      * register
      * 
      */
-    public function signup(RegisterRequest $request, AuthRepository $authRepository)
+    public function store(RegisterRequest $request, AuthRepository $authRepository)
     {
-        $createUser = $authRepository->createUser($request);
-        return response()->json(['data' =>'Sginup success'], 200);
+        $user = $authRepository->createUser($request);
+        return redirect('/home');
+    }
+    /**
+     * 
+     * register
+     * 
+     */
+    public function register(AuthRepository $authRepository)
+    {
+        $loginStatus = $authRepository->checkIfLoged();
+        if($loginStatus) {
+            return redirect('/home');
+        }
+        return view('auth.register');
+    }
+    /**
+     * 
+     * login page
+     * 
+     */
+    public function login(AuthRepository $authRepository)
+    {
+        $loginStatus = $authRepository->checkIfLoged();
+        if($loginStatus) {
+            return redirect('/home');
+        }
+        return view('auth.login');
     }
     /**
      * 
      * login
      * 
      */
-    public function login(LoginRequest $request, AuthRepository $authRepository)
+    public function sginIn(LoginRequest $request, AuthRepository $authRepository)
     {
-        $login = $authRepository->sginin($request);
-        if(!$login) {
+        $user = $authRepository->sginin($request);
+        if(!$user) {
             return response()->json(['data' => 'your email or password is incorrect'], 400);
         }
-        return response()->json(['data' =>'you\'re successfuly loged in'], 200);
+        return redirect('/home');
     }
     /**
      * 
@@ -41,6 +67,6 @@ class AuthController extends Controller
     public function logout(AuthRepository $authRepository)
     {
         $authRepository->sginout();
-        return response()->json(['data' => 'Successfully loged out'], 200);
+        return redirect('/home');
     }
 }

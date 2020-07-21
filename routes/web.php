@@ -11,16 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
-
-
 Route::group([
-    'namespace' => 'User'
+    'namespace' => 'User',
+    'prefix' => 'auth'
 ], function() {
 
-    Route::post('/register', 'AuthController@signup');
-    Route::post('/login', 'AuthController@login');
-    Route::post('/logout', 'AuthController@logout');
+    Route::get('/register', 'AuthController@register')->name('register.index');
+    Route::post('/store', 'AuthController@store')->name('auth.register');
+    Route::get('/login', 'AuthController@login')->name('login.index');
+    Route::post('sgin-in', 'AuthController@sginIn')->name('auth.login');
+    Route::post('/logout', 'AuthController@logout')->name('auth.logout');
 });
+Route::get('/home', function() {
+    return view('index');
+})->name('home');

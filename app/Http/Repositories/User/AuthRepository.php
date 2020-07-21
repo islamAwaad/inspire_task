@@ -17,7 +17,7 @@ class AuthRepository {
     {
         $user = User::create($request->all());
         Auth::guard('web')->login($user);
-        return true;
+        return $user;
     }
     /**
      * 
@@ -30,8 +30,8 @@ class AuthRepository {
         if($user) {
             $check = Hash::check($request->password, $user->password);
             if($check) {
-                Auth::gaurd('web')->login($user);
-                return true;
+                Auth::guard('web')->login($user);
+                return $user;
             }
             return  false;
         }
@@ -46,4 +46,16 @@ class AuthRepository {
         Auth::logout();
         return true;
     }
+    /**
+     * 
+     * check login status
+     * 
+     */
+        public function checkIfLoged() {
+            $user = Auth::user();
+            if($user) {
+                return true;
+            }
+            return false;
+        }
 }
