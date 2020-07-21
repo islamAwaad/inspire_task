@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
+});
+
+
+Route::group([
+    'namespace' => 'User'
+], function() {
+
+    Route::post('/register', 'AuthController@signup');
+    Route::post('/login', 'AuthController@login');
+    Route::post('/logout', 'AuthController@logout');
 });
