@@ -1,5 +1,5 @@
 @include('layouts.nav')
-<div class="content">
+<div class="container">
     @yield('content')
 </div>
 @include('layouts.footer')

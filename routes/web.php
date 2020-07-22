@@ -22,6 +22,20 @@ Route::group([
     Route::post('sgin-in', 'AuthController@sginIn')->name('auth.login');
     Route::post('/logout', 'AuthController@logout')->name('auth.logout');
 });
-Route::get('/home', function() {
-    return view('index');
-})->name('home');
+
+Route::group([
+    'namespace' => 'WebServices'
+], function() {
+    Route::get('home', 'PostController@getAllPaginate')->name('home');
+    
+    Route::group([
+        'prefix' => 'post'
+    ],function() {
+        Route::get('get', 'PostController@get')->name('post.get');
+        Route::get('create', 'PostController@createPage')->name('post.create.page');
+        Route::post('store', 'PostController@store')->name('post.store');
+        Route::get('me', 'PostController@userPosts')->name('post.user');
+        Route::get('show/{post_id}', 'PostController@showPost')->name('post.show');
+        Route::post('delete', 'PostController@deletePost')->name('post.delete');
+    });
+});

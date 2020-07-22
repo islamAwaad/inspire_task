@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card-header">Login</div>
             <div class="card-body">
+                @include('inc.messages')
                 <form action="{{Route('auth.login')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group row">

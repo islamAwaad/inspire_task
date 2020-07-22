@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card-header">Register</div>
             <div class="card-body">
+                @include('inc.messages')
                 <form action="{{Route('auth.register')}}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group row">

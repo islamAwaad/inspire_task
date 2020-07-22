@@ -8,5 +8,5 @@ use App\Http\Repositories\User\UserRepository;
 
 class UserController extends Controller
 {
-
+    
 }
