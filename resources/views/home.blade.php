@@ -9,7 +9,11 @@
             <img class="card-img-top" src="{{$post->image}}" alt="Card image cap">
 
             <div class="card-text">
-                {{ strlen($post->description) > 200 ? substr($post->description,0,200) . '...': $post->description }}
+                @if(strlen($post->description) > 400)
+                {!! substr($post->description,0,600) . '...' !!}
+                @else
+                {!! $post->description !!}
+                @endif
             </div>
 
             <a href="{{Route('post.show', $post->id)}}" class="btn btn-primary">Read More..</a>

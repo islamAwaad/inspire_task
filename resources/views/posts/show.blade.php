@@ -3,7 +3,7 @@
 <div class="mt-5">
     <div>
         <h1 style="display:inline">{{$post->title}}</h1>
-        <p class="float-right">Created At {{$post->created_at}}</p>
+        <p class="float-right">Created At {{$post->created_at->diffForHumans()}}</p>
     </div>
     <img class="mt-2 mb-5 offset-2" src="{{$post->image}}" alt="">
     <div class="mb-5">

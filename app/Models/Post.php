@@ -17,6 +17,10 @@ class Post extends Model
     public function getImageAttribute($value) {
         return $value ? url($value):'';
     }
+
+    public function getDescriptionAttribute($value) {
+        return $value ? html_entity_decode($value) :'';
+    }
     /**
      * 
      * relations

@@ -41,13 +41,13 @@ Route::group([
 });
 
 Route::group([
+    'namespace' => 'Admin',
     'prefix' => 'admin'
 ], function() {
     Route::get('home', function() {
         return view('dashboard.index'); 
     });
     Route::group([
-        'namespace' => 'Admin',
         'prefix' => 'user'
     ],function() {
         Route::get('list', 'UserController@getAllPaginate')->name('user.list');
@@ -56,5 +56,22 @@ Route::group([
         Route::post('delete', 'UserController@delete')->name('user.delete');
         Route::get('create-page', 'UserController@createPage')->name('user.create.page');
         Route::post('add', 'UserController@store')->name('user.store');
+    });
+
+    Route::group([
+        'prefix' => 'post'
+    ], function() {
+        Route::get('list', 'PostController@getAll')->name('admin.post.list');
+        Route::get('show/{post_id}', 'PostController@showPost')->name('admin.post.show');
+        Route::post('update', 'PostController@updatePost')->name('admin.post.update');
+        Route::post('delete', 'PostController@delete')->name('admin.post.delete');
+        Route::get('create', 'PostController@createPage')->name('admin.post.create.page');
+        Route::post('store', 'PostController@storePost')->name('admin.post.store');
+    });
+
+    Route::group([
+        'prefix' => 'page'
+    ],function() {
+        Route::get('list', 'PageController@getAll')->name('admin.page.list');
     });
 });

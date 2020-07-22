@@ -20,13 +20,8 @@
                             <input type="file" name="img">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <textarea placeholder="Add post description" id="description" class="form-control"
-                                name="description"></textarea>
-                        </div>
-                    </div>
-                    <!-- <textarea id="mytextarea" name="description"></textarea> -->
+
+                    <textarea id="mytextarea" name="description"></textarea>
                     <div class="col-md-6  mt-4">
                         <button type="submit" class="btn btn-primary float-left">
                             Add

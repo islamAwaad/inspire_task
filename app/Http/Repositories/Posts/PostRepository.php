@@ -58,16 +58,12 @@ class PostRepository {
             $request->merge([
                 'user_id' => $user_id,
             ]);
-            
             if($request->has('img')) {
                 $request->merge([
                     'image' => 'uploads/' . $request->file('img')->store('posts/gallery'),
                 ]);
             }
-            
-            $post = Post::where('id',$request->post_id)
-                        ->where('user_id', $user_id)
-                        ->first();
+            $post = Post::find($request->post_id);
             return $post ? $post->update($request->all()): false; 
         }else {
             return false;
@@ -82,9 +78,11 @@ class PostRepository {
     public function destroy($request)
     {
         if(isset(Auth::user()->id)){
-            $post = Post::where('id', $request->post_id)
-                        ->where('user_id', Auth::user()->id)
-                        ->first();
+            $post = Post::where('id', $request->post_id);
+            if(Auth::user()->roles->first()->name == "admin"){
+                $post->where('user_id', Auth::user()->id);
+            }
+            $post = $post->first();
         }
                     
         return $post ? $post->delete(): false;
