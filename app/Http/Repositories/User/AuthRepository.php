@@ -19,7 +19,9 @@ class AuthRepository {
         $user = User::create($request->all());
         $role = Role::where('name', 'user')->first();
         $user->roles()->attach($role->id);
-        Auth::guard('web')->login($user);
+        if(Auth::guest()) {
+            Auth::guard('web')->login($user);
+        }
         return $user;
     }
     /**

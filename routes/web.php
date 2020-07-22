@@ -39,3 +39,22 @@ Route::group([
         Route::post('delete', 'PostController@deletePost')->name('post.delete');
     });
 });
+
+Route::group([
+    'prefix' => 'admin'
+], function() {
+    Route::get('home', function() {
+        return view('dashboard.index'); 
+    });
+    Route::group([
+        'namespace' => 'Admin',
+        'prefix' => 'user'
+    ],function() {
+        Route::get('list', 'UserController@getAllPaginate')->name('user.list');
+        Route::get('show/{user_id}', 'UserController@showUser')->name('user.show');
+        Route::post('edit', 'UserController@updateUser')->name('user.update');
+        Route::post('delete', 'UserController@delete')->name('user.delete');
+        Route::get('create-page', 'UserController@createPage')->name('user.create.page');
+        Route::post('add', 'UserController@store')->name('user.store');
+    });
+});

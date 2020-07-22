@@ -14,3 +14,12 @@
     </div>
 </div>
 @endif
+
+@if(session()->has('err'))
+<div class="row">
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Notification </strong>{{session()->get('err')}}
+    </div>
+</div>
+@endif
