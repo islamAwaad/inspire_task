@@ -73,5 +73,10 @@ Route::group([
         'prefix' => 'page'
     ],function() {
         Route::get('list', 'PageController@getAll')->name('admin.page.list');
+        Route::get('show/{page_id}', 'PageController@showPage')->name('admin.page.show');
+        Route::post('update', 'PageController@updatePage')->name('admin.page.update');
+        Route::post('delete', 'PageController@delete')->name('admin.page.delete');
+        Route::get('create', 'PageController@createPage')->name('admin.page.create.page');
+        Route::post('store', 'PageController@storePage')->name('admin.page.store');
     });
 });

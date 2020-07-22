@@ -16,7 +16,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Pages</h3>
-            <!-- <a href="{{Route('admin.post.create.page')}}" class="btn btn-success float-right">Create</a> -->
+            <a href="{{Route('admin.page.create.page')}}" class="btn btn-success float-right">Create</a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -24,24 +24,22 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th style="width:10%">Image</th>
-                        <th>Title</th>
+                        <th>Page Name</th>
+
                         <th style="width:10%">action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($posts as $post)
+                    @foreach($pages as $page)
                     <tr>
-                        <td>{{$post->id}}.</td>
-                        <td><img src="{{$post->image}}" alt="" style="width:100%"></td>
+                        <td>{{$page->id}}.</td>
+                        <td>{{$page->name}}</td>
+
                         <td>
-                            {{$post->title}}
-                        </td>
-                        <td>
-                            <a href="{{asset('/admin/post/show/' . $post->id)}}" class="btn btn-info">edit</a>
-                            <form style="display:inline" action="{{Route('admin.post.delete')}}" method="post">
+                            <a href="{{ Route('admin.page.show', $page->id) }}" class="btn btn-info">edit</a>
+                            <form style="display:inline" action="{{Route('admin.page.delete')}}" method="post">
                                 {{csrf_field()}}
-                                <input type="hidden" name="post_id" value="{{$post->id}}">
+                                <input type="hidden" name="page_id" value="{{$page->id}}">
                                 <button type="submit" class="btn btn-danger">delete</button>
                             </form>
                         </td>
@@ -53,7 +51,7 @@
         <!-- /.card-body -->
         <div class="card-footer clearfix">
             <div class="float-right">
-                {{$posts->links()}}
+                {{$pages->links()}}
             </div>
         </div>
     </div>

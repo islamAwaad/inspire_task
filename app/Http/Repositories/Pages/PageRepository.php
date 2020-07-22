@@ -1,7 +1,8 @@
 <?php 
 
 namespace App\Http\Repositories\Pages;
-
+use App\Models\Page;
+use Illuminate\Support\Facades\Auth;
 class PageRepository {
      /**
      * 
