@@ -12,11 +12,9 @@
         </h5>
         <div class="card-body">
             <img class="card-img-top" src="{{$post->image}}" alt="Card image cap">
-            @if(strlen($post->description) > 100)
-            <div class="card-text">{!! substr($post->description,0,200) !!} ....</div>
-            @else
-            <div class="card-text">{!! $post->description !!}</div>
-            @endif
+            <div class="card-text">
+                {{ strlen($post->description) > 200 ? substr($post->description,0,200) . '...': $post->description }}
+            </div>
             <a href="{{Route('post.show', $post->id)}}" class="btn btn-primary">Read More..</a>
         </div>
     </div>
