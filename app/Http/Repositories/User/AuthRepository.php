@@ -5,6 +5,7 @@ namespace App\Http\Repositories\User;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
 
 class AuthRepository {
 
@@ -16,6 +17,8 @@ class AuthRepository {
     public function createUser($request)
     {
         $user = User::create($request->all());
+        $role = Role::where('name', 'user')->first();
+        $user->roles()->attach($role->id);
         Auth::guard('web')->login($user);
         return $user;
     }
