@@ -54,10 +54,10 @@ class AuthController extends Controller
     public function sginIn(LoginRequest $request, AuthRepository $authRepository)
     {
         $user = $authRepository->sginin($request);
-        if(!$user) {
-            return response()->json(['data' => 'your email or password is incorrect'], 400);
+        if($user) {
+            return redirect('/home');
         }
-        return redirect('/home');
+        return view('auth.register');
     }
     /**
      * 

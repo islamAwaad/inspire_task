@@ -33,9 +33,12 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="btn btn-dark" data-widget="control-sidebar" data-slide="true" href="#">
-                        Logout
-                    </a>
+                    <form style="display:inline" action="{{Route('admin.logout')}}" method="post">
+                        {{csrf_field()}}
+                        <button class="btn btn-dark" type="submit" data-widget="control-sidebar" data-slide="true">
+                            Logout
+                        </button>
+                    </form>
                 </li>
             </ul>
         </nav>
