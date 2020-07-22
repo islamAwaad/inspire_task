@@ -57,7 +57,8 @@ class AuthController extends Controller
         if($user) {
             return redirect('/home');
         }
-        return view('auth.register');
+        session()->flash('err', 'Email Or Password is incorrect!');
+        return view('auth.login');
     }
     /**
      * 

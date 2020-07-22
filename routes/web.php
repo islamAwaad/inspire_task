@@ -16,10 +16,10 @@ Route::group([
     'prefix' => 'auth'
 ], function() {
 
-    Route::get('/register', 'AuthController@register')->name('register.index');
+    Route::get('/register', 'AuthController@register')->name('register.page');
     Route::post('/store', 'AuthController@store')->name('auth.register');
-    Route::get('/login', 'AuthController@login')->name('login.index');
-    Route::post('sgin-in', 'AuthController@login')->name('auth.login');
+    Route::get('/login', 'AuthController@login')->name('login.page');
+    Route::post('sgin-in', 'AuthController@sginIn')->name('auth.login');
     Route::post('/logout', 'AuthController@logout')->name('auth.logout');
 });
 
@@ -37,6 +37,13 @@ Route::group([
         Route::get('me', 'PostController@userPosts')->name('post.user');
         Route::get('show/{post_id}', 'PostController@showPost')->name('post.show');
         Route::post('delete', 'PostController@deletePost')->name('post.delete');
+    });
+
+    Route::group([
+        'prefix' => 'page'
+    ],function() {
+        Route::get('show/{page_id}', 'HomeController@showPage')->name('show.page');
+
     });
 });
 
@@ -85,6 +92,13 @@ Route::group([
             Route::post('delete', 'PageController@delete')->name('admin.page.delete');
             Route::get('create', 'PageController@createPage')->name('admin.page.create.page');
             Route::post('store', 'PageController@storePage')->name('admin.page.store');
+        });
+
+        Route::group([
+            'prefix' => 'settings'    
+        ],function() {
+            Route::get('show', 'SiteSettingController@showPage')->name('admin.setting');
+            Route::post('edit', 'SiteSettingController@updateSettings')->name('admin.setting.update');
         });
     });
 });

@@ -2,10 +2,12 @@
 @section('content')
 <div class="row justify-content-center mt-5">
     <div class="col-md-8">
+        <div class="offset-3">
+            @include('inc.messages')
+        </div>
         <div class="card">
             <div class="card-header">Login</div>
             <div class="card-body">
-                @include('inc.messages')
                 <form action="{{Route('auth.login')}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group row">
